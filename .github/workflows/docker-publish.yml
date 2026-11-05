@@ -23,6 +23,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install training dependencies
+        run: pip install -r requirements.txt
+
+      - name: Train model and generate artifacts
+        run: python train_model.py
+
       - name: Build Docker image
         run: docker build -t $IMAGE_NAME:ci .
 
